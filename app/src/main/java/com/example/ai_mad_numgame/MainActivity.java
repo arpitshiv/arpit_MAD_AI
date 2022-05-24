@@ -72,12 +72,33 @@ public class MainActivity extends AppCompatActivity {
     public void newMatch() {  //A game is composed of three matches
 
         int operand1 = random.nextInt(10);
-        int operand2=0;
+        int operand2= random.nextInt(10);
         //check is operand2 is not zero; otherwise in case of division-divide by zero error will come
         String operator = operators[random.nextInt(4)];
+
         textView2.setText(operand1 + operator + operand2);
 
       // Your code here, to diplay correct and incorrect options on the buttons
+        int rnd1= random.nextInt(10);
+        int rnd2= random.nextInt(10);
+        int correctans=-100;
+        if(operator.equals("+")){
+            correctans=operand1+operand2;
+        correctButton=1;}
+        else if(operator.equals(("-"))){
+            correctans=operand1-operand2;
+        correctButton=2;}
+        else if(operator.equals("*")){
+            correctans=operand1*operand2;
+        correctButton=3;}
+        else if(operator.equals("/")){
+            correctans=operand1/operand2;
+        correctButton=4;}
+        button1.setText(operand1+operand2 + " ");
+        button2.setText(operand1-operand2+ " ");
+        button3.setText(operand1*operand2 + " ");
+        button4.setText(operand1/operand2 + " ");
+
 
         if(matchCounter==3){    // if three matches are completed updatee the perfomrance in sharedpreferences
 
@@ -95,7 +116,8 @@ public class MainActivity extends AppCompatActivity {
     public int sumOfScore(){
         //Computing the sum of score array, which has the 1 or in each index,depending on correct or incorrect answers
         int sum=0;
-       // your code here
+       for(int i=0;i<=2;i++)
+           sum=sum+score[i];
         return sum;
     }
 
@@ -113,8 +135,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public String getInterpretation(int [][]dataFrame,double slope){
+
        //provide interpretation based on your slope analysis
         // Your code here
-        return "Your Interpretation";
+        if(slope==0 && slope<=.5)
+            return "you are constantly great";
+         else if (slope>.5 && slope<1)
+             return "you are doing good";
+         else
+             return "improve";
+
+
+
+
     }
 }
